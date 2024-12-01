@@ -1,6 +1,4 @@
-"use client";
-
-import { SignInButton } from '@/components/auth/sign-in-button';
+import { AuthButton } from '@/components/auth/auth-button';
 
 export default function SignInPage() {
   return (
@@ -16,7 +14,7 @@ export default function SignInPage() {
         </div>
 
         <div className="space-y-4">
-          <SignInButton />
+          <AuthButton />
         </div>
       </div>
     </div>
