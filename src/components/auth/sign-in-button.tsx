@@ -2,13 +2,17 @@
 
 import { Button } from '@/components/ui/button';
 import { Github } from 'lucide-react';
-import { signIn } from 'next-auth/react';
 
 export function SignInButton() {
+  const handleSignIn = async () => {
+    const { signIn } = await import('next-auth/react');
+    await signIn('github', { callbackUrl: '/' });
+  };
+
   return (
     <Button
       variant="outline"
-      onClick={() => signIn('github', { callbackUrl: '/' })}
+      onClick={handleSignIn}
       className="w-full"
     >
       <Github className="mr-2 h-4 w-4" />
