@@ -1,19 +1,26 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
-import { Github } from 'lucide-react';
-import { signIn } from 'next-auth/react';
+import { Button } from "@/components/ui/button";
+import { Github } from "lucide-react";
 
-export default function SignInButtons() {
+export function SignInButton() {
+  const handleSignIn = async () => {
+    try {
+      const { signIn } = await import("next-auth/react");
+      await signIn("github", { callbackUrl: "/" });
+    } catch (error) {
+      console.error("Sign-in failed:", error);
+    }
+  };
+
   return (
-    <div className="grid gap-4">
-      <Button
-        variant="outline"
-        onClick={() => signIn('github', { callbackUrl: '/' })}
-      >
-        <Github className="mr-2 h-4 w-4" />
-        Continue with Github
-      </Button>
-    </div>
+    <Button
+      variant="outline"
+      onClick={handleSignIn}
+      className="w-full"
+    >
+      <Github className="mr-2 h-4 w-4" />
+      Continue with GitHub
+    </Button>
   );
 }
