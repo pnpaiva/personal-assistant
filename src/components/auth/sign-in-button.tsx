@@ -1,9 +1,16 @@
 "use client";
 
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Github } from "lucide-react";
 
-export function SignInButton() {
+export default function SignInButton() {
+  return (
+    <InteractiveButton />
+  );
+}
+
+function InteractiveButton() {
   const handleSignIn = async () => {
     try {
       const { signIn } = await import("next-auth/react");
@@ -24,3 +31,4 @@ export function SignInButton() {
     </Button>
   );
 }
+
