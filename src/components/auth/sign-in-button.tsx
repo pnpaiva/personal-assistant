@@ -1,12 +1,16 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
-import { Github } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { Github } from "lucide-react";
 
 export function SignInButton() {
   const handleSignIn = async () => {
-    const { signIn } = await import('next-auth/react');
-    await signIn('github', { callbackUrl: '/' });
+    try {
+      const { signIn } = await import("next-auth/react");
+      await signIn("github", { callbackUrl: "/" });
+    } catch (error) {
+      console.error("Sign-in failed:", error);
+    }
   };
 
   return (
