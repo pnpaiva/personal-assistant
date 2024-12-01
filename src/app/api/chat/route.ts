@@ -1,39 +1,45 @@
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
+import { auth } from '@/lib/auth';
 
-// Initialize OpenAI client
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
 export async function POST(req: Request) {
   try {
+    // Check authentication
+    const session = await auth();
+    if (!session) {
+      return new NextResponse('Unauthorized', { status: 401 });
+    }
+
     const { message } = await req.json();
 
-    // Call OpenAI API
+    if (!message) {
+      return new NextResponse('Message is required', { status: 400 });
+    }
+
     const chatCompletion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: 'gpt-3.5-turbo',
       messages: [
         {
-          role: "system",
-          content: "You are a helpful personal assistant."
+          role: 'system',
+          content:
+            'You are a helpful personal assistant. Provide clear and concise responses.',
         },
         {
-          role: "user",
-          content: message
-        }
+          role: 'user',
+          content: message,
+        },
       ],
     });
 
-    // Extract the response
-    const response = chatCompletion.choices[0]?.message?.content || "I'm sorry, I couldn't process that request.";
+    const response = chatCompletion.choices[0]?.message?.content || 'Sorry, I could not process your request.';
 
     return NextResponse.json({ response });
   } catch (error) {
-    console.error('Error processing chat:', error);
-    return NextResponse.json(
-      { error: 'Failed to process chat message' },
-      { status: 500 }
-    );
+    console.error('Error in chat API:', error);
+    return new NextResponse('Internal Server Error', { status: 500 });
   }
 }
