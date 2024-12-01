@@ -1,21 +1,21 @@
-import { Button } from '@/components/ui/button';
-import { Github } from 'lucide-react';
-import SignInButtons from './sign-in-buttons';
+import { SignInButton } from '@/components/auth/sign-in-button';
 
-export default function SignIn() {
+export default function SignInPage() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
-      <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-        <div className="flex flex-col space-y-2 text-center">
+    <div className="flex min-h-screen flex-col items-center justify-center p-4">
+      <div className="w-full max-w-sm space-y-6">
+        <div className="space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">
-            Welcome back
+            Welcome
           </h1>
           <p className="text-sm text-muted-foreground">
-            Sign in to your account
+            Sign in to access your personal assistant
           </p>
         </div>
 
-        <SignInButtons />
+        <div className="space-y-4">
+          <SignInButton />
+        </div>
       </div>
     </div>
   );
