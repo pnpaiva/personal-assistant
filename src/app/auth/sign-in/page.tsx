@@ -12,7 +12,6 @@ export default function SignInPage() {
             Sign in to access your personal assistant
           </p>
         </div>
-
         <div className="space-y-4">
           <AuthButton />
         </div>
