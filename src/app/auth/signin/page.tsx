@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
-import { Github, Mail } from 'lucide-react';
+import { Github } from 'lucide-react';
+import SignInButtons from './sign-in-buttons';
 
 export default function SignIn() {
   return (
@@ -14,22 +15,7 @@ export default function SignIn() {
           </p>
         </div>
 
-        <div className="grid gap-4">
-          <Button
-            variant="outline"
-            onClick={() => signIn('github')}
-          >
-            <Github className="mr-2 h-4 w-4" />
-            Github
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() => signIn('google')}
-          >
-            <Mail className="mr-2 h-4 w-4" />
-            Google
-          </Button>
-        </div>
+        <SignInButtons />
       </div>
     </div>
   );
