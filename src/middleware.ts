@@ -12,7 +12,7 @@ export default auth((req) => {
   }
 
   if (!isAuth) {
-    return Response.redirect(new URL('/auth/signin', req.nextUrl));
+    return Response.redirect(new URL('/auth/sign-in', req.nextUrl));
   }
   return null;
 });
